@@ -135,7 +135,7 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 	return (
 		<div className="h-screen w-screen justify-center items-center flex">
 			{connected ? (
-				<section className="flex flex-col gap-2 z-40 absolute -translate-y-1/2 -left-7 hover:left-0 duration-150 top-1/2 rounded-r-md bg-background/80 p-[0.25rem] text-xs backdrop-blur-lg w-12">
+				<section className="flex flex-col gap-2 z-40 absolute -translate-y-1/2 -left-7 hover:left-0 duration-150 top-1/2 rounded-r-md bg-background/80 p-[0.25rem] text-xs backdrop-blur-lg w-12 [&_svg]:size-8">
 					<Button
 						variant="ghost"
 						size="icon"
@@ -176,18 +176,18 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 					</SheetHeader>
 					<section className="grid grid-cols-2 gap-3 py-2">
 						<Button
-							className="w-full"
+							size="lg"
 							onClick={() => {
 								setSidebarOpen(false);
 								vncRef?.current?.rfb?.disconnect();
 								router.push("/");
 							}}
 						>
-							<ScreenShareOff className="mr-2 size-5 shrink-0" />
+							<ScreenShareOff />
 							Disconnect
 						</Button>
 						<Button
-							className="w-full"
+							size="lg"
 							onClick={() =>
 								toast.promise(
 									async () => {
@@ -202,12 +202,12 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 								)
 							}
 						>
-							<Pause className="mr-2 size-5 shrink-0" />
-							Pause Session
+							<Pause />
+							Pause
 						</Button>
 
 						<Button
-							className="w-full px-3 "
+							size="lg"
 							onClick={() =>
 								toast.promise(() => manageSession({ id: params.slug, action: "restart" }), {
 									loading: "Restarting container...",
@@ -216,11 +216,11 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 								})
 							}
 						>
-							<RotateCw className="mr-2 size-5 shrink-0" />
-							Restart Session
+							<RotateCw />
+							Restart
 						</Button>
 						<Button
-							className="w-full"
+							size="lg"
 							onClick={() =>
 								toast.promise(
 									async () => {
@@ -235,14 +235,14 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 								)
 							}
 						>
-							<Square className="mr-2 size-5 shrink-0" />
-							Stop Session
+							<Square />
+							Stop
 						</Button>
 						<AlertDialog>
 							<AlertDialogTrigger asChild>
-								<Button variant="destructive" className="w-full">
-									<TrashIcon className="mr-2 size-5 shrink-0" />
-									Delete Session
+								<Button variant="destructive" size="lg">
+									<TrashIcon />
+									Delete
 								</Button>
 							</AlertDialogTrigger>
 							<AlertDialogContent>
@@ -271,14 +271,14 @@ export default function Page(props: { params: Promise<{ slug: string }> }) {
 											);
 										}}
 									>
-										<Button variant="destructive">Delete Session</Button>
+										<Button variant="destructive">Delete</Button>
 									</AlertDialogAction>
 								</AlertDialogFooter>
 							</AlertDialogContent>
 						</AlertDialog>
-						<Button className="w-[98%]" variant="secondary" asChild>
+						<Button size="lg" variant="secondary" asChild>
 							<Link href="/auth/signout">
-								<LogOut className="mr-2 size-5 shrink-0" />
+								<LogOut />
 								Log Out
 							</Link>
 						</Button>

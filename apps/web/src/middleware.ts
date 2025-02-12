@@ -1,8 +1,16 @@
-import auth from "@stardust/common/auth";
+import auth, { type SessionSchema } from "@stardust/common/auth";
 import { type NextRequest, NextResponse } from "next/server";
+import { reqWithTrustedOrigin } from "./lib/real-origin-req";
 const allowedPaths = ["/auth/signin", "/auth/error", "/auth/verify", "/auth/signup"];
 export default async function middleware(req: NextRequest) {
-	const session = await auth.api.getSession({ headers: req.headers });
+	// const session = await auth.api.getSession({ headers: req.headers });
+	const sessionEndpoint = `${reqWithTrustedOrigin(req).nextUrl.origin}/api/auth/get-session`;
+	const res = await fetch(sessionEndpoint, {
+		headers: {
+			cookie: req.headers.get("cookie") || "",
+		},
+	});
+	const session: SessionSchema = await res.json();
 	if (session || allowedPaths.includes(req.nextUrl.pathname)) {
 		return NextResponse.next();
 	}
@@ -12,5 +20,5 @@ export default async function middleware(req: NextRequest) {
 
 export const config = {
 	matcher: ["/((?!_next/static|_next/image|icon.svg|nostr|api/auth|manifest.webmanifest).*)"],
-	runtime: "nodejs",
+	// runtime: "nodejs",
 };

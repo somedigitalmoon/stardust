@@ -63,7 +63,7 @@
 		"@types/react-dom": "18.3.0",
 		"babel-plugin-react-compiler": "19.0.0-beta-55955c9-20241229",
 		"node-loader": "^2.1.0",
-		"shadcn": "2.1.9-canary.0",
+		"shadcn": "2.4.0-canary.5",
 		"typescript": "5.5.4"
 	}
 }
